@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
-import { PublicPage, Movies, Profile, HomePage } from "./pages";
+import { PublicPage, Movies, UpcomingMovies, TrendingMovies, Profile, HomePage } from "./pages";
 
 import LoginPage from "./loginPage";
 import SignUpPage from "./signUpPage";
@@ -26,6 +26,12 @@ const App = () => {
             <Link to="/movies">Movies</Link>
           </li>
           <li>
+            <Link to="/tmdb/upcoming">Upcoming Movies</Link>
+          </li>
+          <li>
+            <Link to="/tmdb/trending">Trending Movies</Link>
+          </li>
+          <li>
             <Link to="/profile">Profile</Link>
           </li>
         </ul>
@@ -38,6 +44,8 @@ const App = () => {
 
             <Route element={<ProtectedRoutes />}>
               <Route path="/movies" element={<Movies />} />
+              <Route path="/tmdb/upcoming" element={<UpcomingMovies />} />
+              <Route path="/tmdb/trending" element={<TrendingMovies />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
 

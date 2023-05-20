@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer, useContext } from "react";
-import { getMovies } from "./api/movie-api";
+import { getMovies, getUpcomingMovies, getTrendingMovies } from "./api/movie-api";
 import { AuthContext } from './authContext';
 
 export const MoviesContext = createContext(null);
@@ -24,10 +24,24 @@ const MoviesContextProvider = props => {
     });
   },[context.isAuthenticated]);
 
+  useEffect(() => {
+    getUpcomingMovies().then(result => {
+      dispatch({ type: "load", payload: {result}});
+    });
+  },[context.isAuthenticated]);
+
+  useEffect(() => {
+    getTrendingMovies().then(result => {
+      dispatch({ type: "load", payload: {result}});
+    });
+  },[context.isAuthenticated]);
+
   return (
     <MoviesContext.Provider
       value={{
-        movies: state.movies
+        movies: state.movies,
+        upcomingMovies: state.upcomingMovies,
+        trendingMovies: state.trendingMovies
       }}
     >
       {props.children}
