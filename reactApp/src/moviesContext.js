@@ -7,7 +7,11 @@ export const MoviesContext = createContext(null);
 const reducer = (state, action) => {
   switch (action.type) {
     case "load":
-      return { movies: action.payload.result };
+      return { movies: action.payload.movies};
+      case "upcomingLoad":
+      return { upcomingMovies: action.payload.movies};
+      case "trendingLoad":
+      return { trendingMovies: action.payload.movies};
     default:
       return state;
   }
@@ -16,23 +20,23 @@ const reducer = (state, action) => {
 const MoviesContextProvider = props => {
   const context = useContext(AuthContext);
 
-  const [state, dispatch] = useReducer(reducer, { movies: []});
+  const [state, dispatch] = useReducer(reducer, { movies: [], upcomingMovies: [], trendingMovies: []});
 
   useEffect(() => {
-    getMovies().then(result => {
-      dispatch({ type: "load", payload: {result}});
+    getMovies().then(movies => {
+      dispatch({ type: "load", payload: {movies}});
     });
   },[context.isAuthenticated]);
 
   useEffect(() => {
-    getUpcomingMovies().then(result => {
-      dispatch({ type: "load", payload: {result}});
+    getUpcomingMovies().then(movies => {
+      dispatch({ type: "upcomingLoad", payload: {movies}});
     });
   },[context.isAuthenticated]);
 
   useEffect(() => {
-    getTrendingMovies().then(result => {
-      dispatch({ type: "load", payload: {result}});
+    getTrendingMovies().then(movies => {
+      dispatch({ type: "trendingLoad", payload: {movies}});
     });
   },[context.isAuthenticated]);
 
