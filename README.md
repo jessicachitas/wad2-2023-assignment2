@@ -4,8 +4,6 @@ Name: Jessica Chitas
 
 ## Features.
 
-A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
-
  + Added Upcoming Movies Page
  + Added Trending Movies Page
 
@@ -28,7 +26,7 @@ npm run dev
 
 In a seperate cmd: 
 
-````
+```
 cd reactApp
 npm install
 npm start
